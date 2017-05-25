@@ -9,6 +9,7 @@
     "dev": "gulp browser-sync",
     "prebuild": "gulp clean",
     "build": "cross-env NODE_ENV=production gulp",
+    "deploy": "sh scripts/deploy.sh",
     "lint": "gulp lint"
   },
   "devDependencies": {
