@@ -4,6 +4,12 @@ const colorActive = '#8870FF';
 const colorNormal = '#E0E4CC';
 const colorSorted = '#64DDBB';
 
+let frames = 1;
+
+export function setSpeed(value) {
+  frames = Math.min(10, Math.max(1, 11 - value)) || 1;
+}
+
 export default class BaseSorter {
   constructor(canvas, array) {
     this.canvas = canvas;
@@ -48,6 +54,6 @@ export default class BaseSorter {
       const y = uh * item.value;
       ctx.fillRect(x, height - y, uw, height);
     });
-    await tick();
+    await tick(frames);
   }
 }

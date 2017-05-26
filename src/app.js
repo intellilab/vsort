@@ -3,6 +3,13 @@ import BubbleSorter from './sorters/bubble';
 import SelectionSorter from './sorters/selection';
 import InsertionSorter from './sorters/insertion';
 import QuickSorter from './sorters/quick';
+import { setSpeed } from './sorters/base';
+
+const elSpeed = document.querySelector('#speed');
+elSpeed.value = 10;
+elSpeed.addEventListener('change', e => {
+  setSpeed(e.target.value);
+}, false);
 
 const array = shuffled(sequence(60));
 
