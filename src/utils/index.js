@@ -1,3 +1,5 @@
+export * from './animation';
+
 export function rand(end, start = 0) {
   return Math.floor(start + Math.random() * (end - start));
 }
@@ -27,10 +29,4 @@ export function createElement(tagName, props) {
 
 export function createCanvas(width = 640, height = 100) {
   return createElement('canvas', { width, height });
-}
-
-export async function tick(n = 1) {
-  for (let i = 0; i < n; i++) {
-    await new Promise(resolve => { requestAnimationFrame(resolve); });
-  }
 }

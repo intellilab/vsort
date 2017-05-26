@@ -20,7 +20,7 @@ export default class BaseSorter {
     args.forEach(i => {
       this.data[i].color = colorActive;
     });
-    await this.tick();
+    await this.render();
   }
 
   async swap(i, j) {
@@ -32,10 +32,10 @@ export default class BaseSorter {
     this.data.forEach(item => {
       item.color = colorSorted;
     });
-    await this.tick();
+    await this.render();
   }
 
-  render() {
+  async render() {
     const { canvas, data } = this;
     const { width, height } = canvas;
     const ctx = canvas.getContext('2d');
@@ -48,10 +48,6 @@ export default class BaseSorter {
       const y = uh * item.value;
       ctx.fillRect(x, height - y, uw, height);
     });
-  }
-
-  async tick() {
-    this.render();
     await tick();
   }
 }
