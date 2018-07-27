@@ -16,17 +16,3 @@ export function shuffled(arr) {
   }
   return result;
 }
-
-export function createElement(tagName, props) {
-  const el = document.createElement(tagName);
-  if (props) {
-    Object.keys(props).forEach(key => {
-      el[key] = props[key];
-    });
-  }
-  return el;
-}
-
-export function createCanvas(width = 640, height = 100) {
-  return createElement('canvas', { width, height });
-}

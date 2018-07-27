@@ -12,3 +12,8 @@ body {
   font-size: .32rem;
   padding: .2rem;
 }
+
+.container {
+  margin-top: .2rem;
+  overflow-x: auto;
+}

@@ -1,0 +1,49 @@
+import h from '@gera2ld/jsx-dom';
+import { sequence, shuffled } from './util';
+import BubbleSorter from './sorters/bubble';
+import SelectionSorter from './sorters/selection';
+import InsertionSorter from './sorters/insertion';
+import QuickSorter from './sorters/quick';
+import { setSpeed } from './sorters/base';
+import './style.css';
+
+const input = <input
+  type="range"
+  min="1"
+  max="10"
+  onChange={e => setSpeed(e.target.value)}
+/>;
+setSpeed(input.value = 10);
+const container = <div className="container" />;
+document.body.append(
+  <a href="https://github.com/intellilab/vsort">
+    <img
+      style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        border: 0,
+      }}
+      src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67"
+      alt="Fork me on GitHub"
+      data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
+    />
+  </a>,
+  <div>Speed: {input}</div>,
+  container,
+);
+const array = shuffled(sequence(60));
+visualizeSort('Bubble sort', BubbleSorter);
+visualizeSort('Selection sort', SelectionSorter);
+visualizeSort('Insertion sort', InsertionSorter);
+visualizeSort('Quick sort', QuickSorter);
+
+function visualizeSort(title, Sorter) {
+  const canvas = <canvas width={640} height={100} />;
+  container.appendChild(<div>
+    <h4>{title}</h4>
+    {canvas}
+  </div>);
+  const sorter = new Sorter(canvas, array);
+  sorter.sort();
+}

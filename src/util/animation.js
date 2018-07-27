@@ -18,7 +18,8 @@ export function tick(n = 1) {
   return new Promise(resolve => {
     let f = 0;
     const revoke = register(() => {
-      if (++f >= n) {
+      f += 1;
+      if (f >= n) {
         revoke();
         resolve();
       }

@@ -1,4 +1,4 @@
-import { tick } from '../utils';
+import { tick } from '../util';
 
 const colorActive = '#8870FF';
 const colorNormal = '#E0E4CC';
