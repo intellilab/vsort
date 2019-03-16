@@ -3,7 +3,9 @@ animate();
 
 function animate() {
   requestAnimationFrame(animate);
-  callbacks.forEach(callback => { callback(); });
+  callbacks.forEach((callback) => {
+    callback();
+  });
 }
 
 export function register(callback) {
@@ -15,7 +17,7 @@ export function register(callback) {
 }
 
 export function tick(n = 1) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     let f = 0;
     const revoke = register(() => {
       f += 1;

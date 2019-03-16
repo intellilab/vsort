@@ -20,10 +20,10 @@ export default class BaseSorter {
   }
 
   async activate(...args) {
-    this.data.forEach(item => {
+    this.data.forEach((item) => {
       item.color = colorNormal;
     });
-    args.forEach(i => {
+    args.forEach((i) => {
       this.data[i].color = colorActive;
     });
     await this.render();
@@ -35,7 +35,7 @@ export default class BaseSorter {
   }
 
   async finish() {
-    this.data.forEach(item => {
+    this.data.forEach((item) => {
       item.color = colorSorted;
     });
     await this.render();

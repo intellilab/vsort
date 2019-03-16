@@ -1,5 +1,6 @@
 export function loadQuery(search) {
-  return search.replace(/^\?/, '')
+  const qs = search[0] === '?' ? search.slice(1) : search;
+  return qs
   .split('&')
   .filter(Boolean)
   .map(item => item.split('='))
@@ -12,4 +13,10 @@ export function loadQuery(search) {
 export function buildURL({ path, query }) {
   const qs = query && Object.keys(query).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`).join('&');
   return path + (qs ? `?${qs}` : '');
+}
+
+export function initSW() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
 }

@@ -1,5 +1,5 @@
 import h from '@gera2ld/jsx-dom';
-import { sequence, shuffled } from './util';
+import { sequence, shuffle } from './util';
 import BubbleSorter from './sorters/bubble';
 import SelectionSorter from './sorters/selection';
 import InsertionSorter from './sorters/insertion';
@@ -7,12 +7,14 @@ import QuickSorter from './sorters/quick';
 import { setSpeed } from './sorters/base';
 import './style.css';
 
-const input = <input
-  type="range"
-  min="1"
-  max="10"
-  onChange={e => setSpeed(e.target.value)}
-/>;
+const input = (
+  <input
+    type="range"
+    min="1"
+    max="10"
+    onChange={e => setSpeed(e.target.value)}
+  />
+);
 setSpeed(input.value = 10);
 const container = <div className="container" />;
 document.body.append(
@@ -32,7 +34,7 @@ document.body.append(
   <div>Speed: {input}</div>,
   container,
 );
-const array = shuffled(sequence(60));
+const array = shuffle(sequence(60));
 visualizeSort('Bubble sort', BubbleSorter);
 visualizeSort('Selection sort', SelectionSorter);
 visualizeSort('Insertion sort', InsertionSorter);
@@ -40,10 +42,12 @@ visualizeSort('Quick sort', QuickSorter);
 
 function visualizeSort(title, Sorter) {
   const canvas = <canvas width={640} height={100} />;
-  container.appendChild(<div>
-    <h4>{title}</h4>
-    {canvas}
-  </div>);
+  container.appendChild((
+    <div>
+      <h4>{title}</h4>
+      {canvas}
+    </div>
+  ));
   const sorter = new Sorter(canvas, array);
   sorter.sort();
 }
