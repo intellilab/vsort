@@ -9,8 +9,9 @@ html {
 }
 
 body {
-  font-size: .32rem;
   padding: .2rem;
+  font-size: .32rem;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .container {
