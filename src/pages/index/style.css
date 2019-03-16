@@ -9,12 +9,24 @@ html {
 }
 
 body {
-  padding: .2rem;
   font-size: .32rem;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
+canvas {
+  box-shadow: 0 0 .03rem #00000033;
+}
+
 .container {
-  margin-top: .2rem;
   overflow-x: auto;
+}
+
+.p {
+  padding: .08rem;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding: .16rem;
+  }
 }

@@ -5,6 +5,8 @@ const COLOR_UNSORTED = '#e0e4cc';
 const COLOR_ACTIVE_BLOCK = '#e0e4ff';
 const COLOR_ACTIVE_ITEM = '#8870ff';
 const COLOR_SORTED = '#64ddbb';
+const CANVAS_WIDTH = Math.min(640, window.innerWidth);
+const CANVAS_HEIGHT = 100;
 
 let frames = 1;
 
@@ -30,7 +32,7 @@ export default class BaseSorter {
   }
 
   getCanvas() {
-    return <canvas width={640} height={100} />;
+    return <canvas width={CANVAS_WIDTH} height={CANVAS_HEIGHT} />;
   }
 
   async commit() {
