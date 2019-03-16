@@ -2,23 +2,25 @@ import Base from './base';
 
 export default class InsertionSorter extends Base {
   async sort() {
-    const { data } = this;
-    for (let i = 0; i < data.length; i += 1) {
-      const item = data[i];
+    const { arrays: [array] } = this;
+    for (let i = 0; i < array.length; i += 1) {
+      const item = array[i];
       let j;
-      let k;
+      let k = i;
       for (j = i - 1; j >= 0; j -= 1) {
-        await this.activate(i, j);
-        if (item.value < data[j].value) {
-          k = j;
-        } else {
-          break;
-        }
+        if (item.value >= array[j].value) break;
+        k = j;
       }
       for (j = i; j > k; j -= 1) {
-        await this.swap(j, j - 1);
+        this.activate([0, i], { block: true });
+        this.activate([j, j - 1], { clear: false });
+        this.set({
+          [j]: array[j - 1],
+          [j - 1]: array[j],
+        });
+        await this.commit();
       }
     }
-    await this.finish();
+    this.finish();
   }
 }

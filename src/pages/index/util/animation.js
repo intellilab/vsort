@@ -28,3 +28,9 @@ export function tick(n = 1) {
     });
   });
 }
+
+export function tickNext() {
+  return new Promise((resolve) => {
+    window.next = resolve;
+  });
+}

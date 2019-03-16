@@ -1,8 +1,10 @@
+import h from '@gera2ld/jsx-dom';
 import { tick } from '../util';
 
-const colorActive = '#8870FF';
-const colorNormal = '#E0E4CC';
-const colorSorted = '#64DDBB';
+const COLOR_UNSORTED = '#e0e4cc';
+const COLOR_ACTIVE_BLOCK = '#e0e4ff';
+const COLOR_ACTIVE_ITEM = '#8870ff';
+const COLOR_SORTED = '#64ddbb';
 
 let frames = 1;
 
@@ -11,49 +13,88 @@ export function setSpeed(value) {
 }
 
 export default class BaseSorter {
-  constructor(canvas, array) {
-    this.canvas = canvas;
-    this.data = array.map(value => ({
+  constructor(data) {
+    this.initializeArray(data);
+    this.initializeCanvas();
+  }
+
+  initializeArray(data) {
+    this.arrays = [data.map(value => ({
       value,
       active: false,
-    }));
+    }))];
   }
 
-  async activate(...args) {
-    this.data.forEach((item) => {
-      item.color = colorNormal;
+  initializeCanvas() {
+    this.canvases = this.arrays.map(() => this.getCanvas());
+  }
+
+  getCanvas() {
+    return <canvas width={640} height={100} />;
+  }
+
+  async commit() {
+    this.canvases.forEach((_, index) => {
+      this.render(index);
     });
-    args.forEach((i) => {
-      this.data[i].color = colorActive;
+    await tick(frames);
+  }
+
+  activate(itemIndices, options = {}, index = 0) {
+    const {
+      clear = true,
+      block = false,
+    } = options;
+    const array = this.arrays[index];
+    if (clear) {
+      array.forEach((item) => {
+        item.color = COLOR_UNSORTED;
+      });
+    }
+    if (block) {
+      const [start, end] = itemIndices;
+      for (let i = start; i <= end; i += 1) {
+        const item = array[i];
+        item.color = COLOR_ACTIVE_BLOCK;
+      }
+    } else {
+      itemIndices.forEach((i) => {
+        const item = array[i];
+        if (item) item.color = COLOR_ACTIVE_ITEM;
+      });
+    }
+  }
+
+  set(values, index = 0) {
+    const array = this.arrays[index];
+    Object.entries(values)
+    .forEach(([i, value]) => {
+      array[i] = value;
     });
-    await this.render();
   }
 
-  async swap(i, j) {
-    [this.data[i], this.data[j]] = [this.data[j], this.data[i]];
-    await this.activate(i, j);
-  }
-
-  async finish() {
-    this.data.forEach((item) => {
-      item.color = colorSorted;
+  finish() {
+    this.arrays.forEach((array) => {
+      array.forEach((item) => {
+        item.color = COLOR_SORTED;
+      });
     });
-    await this.render();
+    this.commit();
   }
 
-  async render() {
-    const { canvas, data } = this;
+  render(index = 0) {
+    const array = this.arrays[index];
+    const canvas = this.canvases[index];
     const { width, height } = canvas;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, width, height);
-    const uw = canvas.width / data.length;
-    const uh = canvas.height / data.length;
-    data.forEach((item, i) => {
+    const uw = canvas.width / array.length;
+    const uh = canvas.height / array.length;
+    array.forEach((item, i) => {
       ctx.fillStyle = item.color;
       const x = uw * i;
       const y = uh * item.value;
       ctx.fillRect(x, height - y, uw, height);
     });
-    await tick(frames);
   }
 }

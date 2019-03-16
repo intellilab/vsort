@@ -1,10 +1,13 @@
 import h from '@gera2ld/jsx-dom';
 import { sequence, shuffle } from './util';
-import BubbleSorter from './sorters/bubble';
-import SelectionSorter from './sorters/selection';
-import InsertionSorter from './sorters/insertion';
-import QuickSorter from './sorters/quick';
-import { setSpeed } from './sorters/base';
+import {
+  setSpeed,
+  BubbleSorter,
+  SelectionSorter,
+  InsertionSorter,
+  QuickSorter,
+  MergeSorter,
+} from './sorters';
 import './style.css';
 
 const input = (
@@ -39,15 +42,15 @@ visualizeSort('Bubble sort', BubbleSorter);
 visualizeSort('Selection sort', SelectionSorter);
 visualizeSort('Insertion sort', InsertionSorter);
 visualizeSort('Quick sort', QuickSorter);
+visualizeSort('Merge sort', MergeSorter);
 
 function visualizeSort(title, Sorter) {
-  const canvas = <canvas width={640} height={100} />;
+  const sorter = new Sorter(array);
   container.appendChild((
     <div>
       <h4>{title}</h4>
-      {canvas}
+      {sorter.canvases.map(canvas => <div>{canvas}</div>)}
     </div>
   ));
-  const sorter = new Sorter(canvas, array);
   sorter.sort();
 }
