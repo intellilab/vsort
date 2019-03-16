@@ -41,8 +41,8 @@ const array = shuffle(sequence(60));
 visualizeSort('Bubble sort', BubbleSorter);
 visualizeSort('Selection sort', SelectionSorter);
 visualizeSort('Insertion sort', InsertionSorter);
-visualizeSort('Quick sort', QuickSorter);
 visualizeSort('Merge sort', MergeSorter);
+visualizeSort('Quick sort', QuickSorter);
 
 function visualizeSort(title, Sorter) {
   const sorter = new Sorter(array);
