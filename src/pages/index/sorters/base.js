@@ -1,10 +1,10 @@
 import h from '@gera2ld/jsx-dom';
 import { tick } from '../util';
 
-const COLOR_UNSORTED = '#e0e4cc';
-const COLOR_ACTIVE_BLOCK = '#e0e4ff';
-const COLOR_ACTIVE_ITEM = '#8870ff';
-const COLOR_SORTED = '#64ddbb';
+const COLOR_UNSORTED = '#ebedf0';
+const COLOR_ACTIVE_BLOCK = '#c6e48b';
+const COLOR_ACTIVE_ITEM = '#239a3b';
+const COLOR_SORTED = '#7bc96f';
 const CANVAS_WIDTH = Math.min(640, window.innerWidth);
 const CANVAS_HEIGHT = 100;
 
