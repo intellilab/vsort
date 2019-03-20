@@ -8,7 +8,7 @@ import {
   QuickSorter,
   MergeSorter,
 } from './sorters';
-import './style.css';
+import styles from './style.module.css';
 
 const input = (
   <input
@@ -19,7 +19,7 @@ const input = (
   />
 );
 setSpeed(input.value = 10);
-const container = <div className="container" />;
+const container = <div className={styles.container} />;
 document.body.append(
   <a href="https://github.com/intellilab/vsort">
     <img
@@ -34,7 +34,7 @@ document.body.append(
       data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"
     />
   </a>,
-  <div className="p">Speed: {input}</div>,
+  <div className={styles.p}>Speed: {input}</div>,
   container,
 );
 const array = shuffle(sequence(60));
@@ -48,7 +48,7 @@ function visualizeSort(title, Sorter) {
   const sorter = new Sorter(array);
   container.appendChild((
     <div>
-      <h4 className="p">{title}</h4>
+      <h4 className={styles.p}>{title}</h4>
       {sorter.canvases.map(canvas => <div>{canvas}</div>)}
     </div>
   ));
