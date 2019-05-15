@@ -1,4 +1,4 @@
-import h from '@gera2ld/jsx-dom';
+import React from '@gera2ld/jsx-dom';
 import { tick } from '../util';
 
 const COLOR_UNSORTED = '#ebedf0';

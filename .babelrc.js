@@ -3,7 +3,6 @@ module.exports = {
   presets: [
     // react
     ['@babel/preset-react', {
-      pragma: 'h',
     }],
   ],
   plugins: [

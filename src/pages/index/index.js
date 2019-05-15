@@ -1,4 +1,4 @@
-import h from '@gera2ld/jsx-dom';
+import React from '@gera2ld/jsx-dom';
 import { sequence, shuffle } from './util';
 import {
   setSpeed,
